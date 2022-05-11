@@ -14,7 +14,7 @@ resource "azurerm_log_analytics_workspace" "law" {
 
 data "azurerm_log_analytics_workspace" "read_created_law" {
   count               = try(var.create_new_workspace, null) == true ? 1 : 0
-  name                = azurerm_log_analytics_workspace.law.name
+  name                = azurerm_log_analytics_workspace.law.*.name
   resource_group_name = var.rg_name
 }
 
