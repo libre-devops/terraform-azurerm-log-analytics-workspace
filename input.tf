@@ -12,6 +12,7 @@ variable "internet_ingestion_enabled" {
 variable "internet_query_enabled" {
   type        = bool
   description = "Whether or not your workspace can be queried from the internet"
+  default     = null
 }
 
 variable "law_name" {
