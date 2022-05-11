@@ -3,6 +3,12 @@ variable "create_new_workspace" {
   description = "Whether or not you wish to create a new workspace, if set to true, a new one will be created, if set to false, a data read will be performed on a data source"
 }
 
+variable "daily_quota_gb" {
+  type        = string
+  description = "The amount of gb set for max daily ingetion"
+  default     = ""
+}
+
 variable "internet_ingestion_enabled" {
   type        = bool
   description = "Whether internet ingestion is enabled"

@@ -6,10 +6,10 @@ resource "azurerm_log_analytics_workspace" "law" {
   sku                                = title(try(var.law_sku, null))
   retention_in_days                  = try(var.retention_in_days, null)
   reservation_capacity_in_gb_per_day = var.law_sku == "CapacityReservation" ? var.reservation_capacity_in_gb_per_day : null
-
-  internet_ingestion_enabled = try(var.internet_ingestion_enabled, null)
-  internet_query_enabled     = try(var.internet_query_enabled, null)
-  tags                       = try(var.tags, null)
+  daily_quota_gb                     = try(var.daily_quota_gb, null)
+  internet_ingestion_enabled         = try(var.internet_ingestion_enabled, null)
+  internet_query_enabled             = try(var.internet_query_enabled, null)
+  tags                               = try(var.tags, null)
 }
 
 data "azurerm_log_analytics_workspace" "read_created_law" {
