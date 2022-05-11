@@ -1,18 +1,45 @@
-variable "identity_ids" {
-  description = "Specifies a list of user managed identity ids to be assigned to the VM."
-  type        = list(string)
-  default     = []
+variable "create_new_workspace" {
+  type        = bool
+  description = "Whether or not you wish to create a new workspace, if set to true, a new one will be created, if set to false, a data read will be performed on a data source"
 }
 
-variable "identity_type" {
-  description = "The Managed Service Identity Type of this Virtual Machine."
+variable "internet_ingestion_enabled" {
+  type        = bool
+  description = "Whether internet ingestion is enabled"
+  default     = null
+}
+
+variable "internet_query_enabled" {
+  type        = bool
+  description = "Whether or not your workspace can be queried from the internet"
+}
+
+variable "law_name" {
   type        = string
+  description = "The name of a log analytics workspace"
+}
+
+variable "law_sku" {
+  type        = string
+  description = "The sku of the log analytics workspace"
   default     = ""
 }
 
 variable "location" {
   description = "The location for this resource to be put in"
   type        = string
+}
+
+variable "reservation_capacity_in_gb_per_day" {
+  type        = string
+  description = "The reservation capacity gb per day, can only be used with CapacityReservation SKU"
+  default     = ""
+}
+
+variable "retention_in_days" {
+  type        = string
+  description = "The number of days for retention, between 7 and 730"
+  default     = ""
 }
 
 variable "rg_name" {

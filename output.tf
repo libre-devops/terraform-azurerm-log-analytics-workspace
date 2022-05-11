@@ -1,32 +1,30 @@
-output "sa_id" {
-  value       = azurerm_storage_account.sa.id
-  description = "The ID of the storage account"
+output "law_id" {
+  description = "The  id of the log analytics workspace. If a new log analytic workspace is created, fetch its data id, if one is created, fetch the remote one instead"
+  value       = var.create_new_workspace == true ? data.azurerm_log_analytics_workspace.read_created_law.id : data.azurerm_log_analytics_workspace.read_law.id
 }
 
-output "sa_name" {
-  value       = azurerm_storage_account.sa.name
-  description = "The name of the storage account"
+output "law_name" {
+  value       = var.law_name
+  description = "The name of the log analytics workspace"
 }
 
-output "sa_primary_access_key" {
-  value       = azurerm_storage_account.sa.primary_access_key
-  description = "The primary access key of the storage account"
-  sensitive   = true
+output "law_portal_url" {
+  description = "The portla urlof the log analytics workspace. If a new log analytic workspace is created, fetch its data id, if one is created, fetch the remote one instead"
+
+  value = var.create_new_workspace == true ? data.azurerm_log_analytics_workspace.read_created_law.portal_url : data.azurerm_log_analytics_workspace.read_law.portal_url
 }
 
-output "sa_primary_blob_endpoint" {
-  value       = azurerm_storage_account.sa.primary_blob_endpoint
-  description = "The primary blob endpoint of the storage account"
+output "law_primary_key" {
+  description = "The primary key of the log analytics workspace. If a new log analytic workspace is created, fetch its data id, if one is created, fetch the remote one instead"
+  value       = var.create_new_workspace == true ? data.azurerm_log_analytics_workspace.read_created_law.primary_shared_key : data.azurerm_log_analytics_workspace.read_law.primary_shared_key
 }
 
-output "sa_primary_connection_string" {
-  value       = azurerm_storage_account.sa.primary_blob_connection_string
-  description = "The primary blob connection string of the storage account"
-  sensitive   = true
+output "law_secondary_key" {
+  description = "The primary key of the log analytics workspace. If a new log analytic workspace is created, fetch its data id, if one is created, fetch the remote one instead"
+  value       = var.create_new_workspace == true ? data.azurerm_log_analytics_workspace.read_created_law.secondary_shared_key : data.azurerm_log_analytics_workspace.read_law.secondary_shared_key
 }
 
-output "sa_secondary_access_key" {
-  value       = azurerm_storage_account.sa.secondary_access_key
-  description = "The secondary access key of the storage account"
-  sensitive   = true
+output "law_workspace_id" {
+  description = "The workspace id of the log analytics workspace. If a new log analytic workspace is created, fetch its data id, if one is created, fetch the remote one instead"
+  value       = var.create_new_workspace == true ? data.azurerm_log_analytics_workspace.read_created_law.workspace_id : data.azurerm_log_analytics_workspace.read_law.workspace_id
 }
