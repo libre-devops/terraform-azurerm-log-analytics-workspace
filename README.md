@@ -1,21 +1,3 @@
-```hcl
-module "law" {
-  source = "registry.terraform.io/libre-devops/log-analytics-workspace/azurerm"
-
-  rg_name  = module.rg.rg_name
-  location = module.rg.rg_location
-  tags     = module.rg.rg_tags
-
-  create_new_workspace       = true
-  law_name                   = "law-${var.short}-${var.loc}-${terraform.workspace}-01"
-  law_sku                    = "PerNode"
-  retention_in_days          = "30"
-  daily_quota_gb             = "0.5"
-  internet_ingestion_enabled = false
-  internet_query_enabled     = false
-}
-```
-
 ## Requirements
 
 No requirements.
@@ -42,12 +24,15 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_allow_resource_only_permissions"></a> [allow\_resource\_only\_permissions](#input\_allow\_resource\_only\_permissions) | Whether users require permissions to resources to view logs | `bool` | `true` | no |
+| <a name="input_cmk_for_query_forced"></a> [cmk\_for\_query\_forced](#input\_cmk\_for\_query\_forced) | Whether or not a Customer Managed Key for the query is forced | `bool` | `true` | no |
 | <a name="input_create_new_workspace"></a> [create\_new\_workspace](#input\_create\_new\_workspace) | Whether or not you wish to create a new workspace, if set to true, a new one will be created, if set to false, a data read will be performed on a data source | `bool` | n/a | yes |
 | <a name="input_daily_quota_gb"></a> [daily\_quota\_gb](#input\_daily\_quota\_gb) | The amount of gb set for max daily ingetion | `string` | `""` | no |
 | <a name="input_internet_ingestion_enabled"></a> [internet\_ingestion\_enabled](#input\_internet\_ingestion\_enabled) | Whether internet ingestion is enabled | `bool` | `null` | no |
 | <a name="input_internet_query_enabled"></a> [internet\_query\_enabled](#input\_internet\_query\_enabled) | Whether or not your workspace can be queried from the internet | `bool` | `null` | no |
 | <a name="input_law_name"></a> [law\_name](#input\_law\_name) | The name of a log analytics workspace | `string` | n/a | yes |
 | <a name="input_law_sku"></a> [law\_sku](#input\_law\_sku) | The sku of the log analytics workspace | `string` | `""` | no |
+| <a name="input_local_authentication_disabled"></a> [local\_authentication\_disabled](#input\_local\_authentication\_disabled) | Whether local authentication is enabled, defaults to false | `bool` | `false` | no |
 | <a name="input_location"></a> [location](#input\_location) | The location for this resource to be put in | `string` | n/a | yes |
 | <a name="input_reservation_capacity_in_gb_per_day"></a> [reservation\_capacity\_in\_gb\_per\_day](#input\_reservation\_capacity\_in\_gb\_per\_day) | The reservation capacity gb per day, can only be used with CapacityReservation SKU | `string` | `""` | no |
 | <a name="input_retention_in_days"></a> [retention\_in\_days](#input\_retention\_in\_days) | The number of days for retention, between 7 and 730 | `string` | `""` | no |
