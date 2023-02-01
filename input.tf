@@ -1,3 +1,15 @@
+variable "allow_resource_only_permissions" {
+  type        = bool
+  description = "Whether users require permissions to resources to view logs"
+  default     = true
+}
+
+variable "cmk_for_query_forced" {
+  type        = bool
+  description = "Whether or not a Customer Managed Key for the query is forced"
+  default     = true
+}
+
 variable "create_new_workspace" {
   type        = bool
   description = "Whether or not you wish to create a new workspace, if set to true, a new one will be created, if set to false, a data read will be performed on a data source"
@@ -30,6 +42,12 @@ variable "law_sku" {
   type        = string
   description = "The sku of the log analytics workspace"
   default     = ""
+}
+
+variable "local_authentication_disabled" {
+  type        = bool
+  description = "Whether local authentication is enabled, defaults to false"
+  default     = false
 }
 
 variable "location" {
