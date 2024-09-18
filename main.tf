@@ -14,15 +14,3 @@ resource "azurerm_log_analytics_workspace" "law" {
   internet_query_enabled             = try(var.internet_query_enabled, null)
   tags                               = try(var.tags, null)
 }
-
-data "azurerm_log_analytics_workspace" "read_created_law" {
-  count               = try(var.create_new_workspace, null) == true ? 1 : 0
-  name                = element(azurerm_log_analytics_workspace.law.*.name, 0)
-  resource_group_name = var.rg_name
-}
-
-data "azurerm_log_analytics_workspace" "read_law" {
-  count               = try(var.create_new_workspace, null) == false ? 1 : 0
-  name                = var.law_name
-  resource_group_name = var.rg_name
-}
