@@ -1,6 +1,5 @@
 ```hcl
 resource "azurerm_log_analytics_workspace" "law" {
-  count                              = try(var.create_new_workspace, null) == true ? 1 : 0
   name                               = try(var.law_name, null)
   location                           = var.location
   resource_group_name                = var.rg_name
@@ -42,7 +41,6 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_allow_resource_only_permissions"></a> [allow\_resource\_only\_permissions](#input\_allow\_resource\_only\_permissions) | Whether users require permissions to resources to view logs | `bool` | `true` | no |
 | <a name="input_cmk_for_query_forced"></a> [cmk\_for\_query\_forced](#input\_cmk\_for\_query\_forced) | Whether or not a Customer Managed Key for the query is forced | `bool` | `true` | no |
-| <a name="input_create_new_workspace"></a> [create\_new\_workspace](#input\_create\_new\_workspace) | Whether or not you wish to create a new workspace, if set to true, a new one will be created, if set to false, a data read will be performed on a data source | `bool` | n/a | yes |
 | <a name="input_daily_quota_gb"></a> [daily\_quota\_gb](#input\_daily\_quota\_gb) | The amount of gb set for max daily ingetion | `string` | `""` | no |
 | <a name="input_internet_ingestion_enabled"></a> [internet\_ingestion\_enabled](#input\_internet\_ingestion\_enabled) | Whether internet ingestion is enabled | `bool` | `null` | no |
 | <a name="input_internet_query_enabled"></a> [internet\_query\_enabled](#input\_internet\_query\_enabled) | Whether or not your workspace can be queried from the internet | `bool` | `null` | no |

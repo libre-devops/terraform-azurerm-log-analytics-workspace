@@ -10,11 +10,6 @@ variable "cmk_for_query_forced" {
   default     = true
 }
 
-variable "create_new_workspace" {
-  type        = bool
-  description = "Whether or not you wish to create a new workspace, if set to true, a new one will be created, if set to false, a data read will be performed on a data source"
-}
-
 variable "daily_quota_gb" {
   type        = string
   description = "The amount of gb set for max daily ingetion"
