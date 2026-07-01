@@ -16,7 +16,7 @@ variable "log_analytics_workspaces" {
   EOT
   type = map(object({
     sku                                     = optional(string, "PerGB2018")
-    retention_in_days                       = optional(number, 30)
+    retention_in_days                       = optional(number, 90)
     daily_quota_gb                          = optional(number)
     allow_resource_only_permissions         = optional(bool, true)
     local_authentication_enabled            = optional(bool, true)
@@ -62,6 +62,13 @@ variable "log_analytics_workspaces" {
   validation {
     condition     = alltrue([for ws in values(var.log_analytics_workspaces) : contains(["Free", "PerNode", "Premium", "Standard", "Standalone", "Unlimited", "CapacityReservation", "PerGB2018", "LACluster"], ws.sku)])
     error_message = "Each workspace sku must be a valid Log Analytics SKU (PerGB2018 is the modern default; CapacityReservation, Free, Standalone, etc.)."
+  }
+
+  validation {
+    # Default is 90 days (a sensible security baseline; the module raises it above Azure's 30). Azure
+    # accepts 7 to 730 days. Trivy has no Log Analytics checks, so this guard lives in the module.
+    condition     = alltrue([for ws in values(var.log_analytics_workspaces) : ws.retention_in_days >= 7 && ws.retention_in_days <= 730])
+    error_message = "Each workspace retention_in_days must be between 7 and 730."
   }
 
   validation {
